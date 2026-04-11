@@ -8,7 +8,9 @@ The key challenge is:
 >How can the company identify which customers are worth retaining and allocate retention resources efficiently to maximize profit?
 
 ## 3. Business Needs
+
 The business does not simply require a high-accuracy model. Instead, it needs:
+
 * Identification of high-risk customers (likely to churn)
 * Evaluation of customer value (e.g., revenue contribution, lifetime value)
 * Decision-making support on:
@@ -16,7 +18,9 @@ The business does not simply require a high-accuracy model. Instead, it needs:
   >How much to invest in retention efforts
 
 ## 4. Key Insight
+
 Not all churn events have the same impact:
+
 Losing a high-value customer results in significant revenue loss
 Losing a low-value customer may have minimal impact
 Retaining a low-value or unprofitable customer may lead to unnecessary costs
@@ -30,7 +34,9 @@ This project combines:
 5.1 Churn Prediction
 * Estimate the probability of each customer churning
 5.2 Customer Value Assessment
+  
   Approximate customer value using:
+  
 * Monthly Charges
 * Tenure
 * Total Charges
