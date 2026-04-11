@@ -1,4 +1,8 @@
 # Customer Churn Prediction – Business-Oriented Framework
+
+<img width="1920" height="1280" alt="image" src="https://github.com/user-attachments/assets/ab986de4-1b8f-460c-8741-2e0dce7c1cfb" />
+
+
 ## 1. Context
 In the telecommunications industry, customer acquisition costs are significantly higher than retention costs. Therefore, reducing customer churn is a critical business objective to maintain stable revenue and improve profitability.
 However, not all customers contribute equally to business value. Some customers generate high revenue over time, while others may yield low or even negative returns when considering acquisition and servicing costs.
@@ -75,3 +79,13 @@ Each prediction outcome has a different business impact:
 * Missing a high-value churner → significant revenue loss
 
 Thus, the model is evaluated not only on predictive performance but also on its economic impact.
+
+## 8. Outcome
+The expected outcomes of this project include:
+* Improved prioritization of customers for retention campaigns
+* More efficient allocation of marketing and retention budgets
+* Increased overall profitability through targeted interventions.
+
+## 9. Conclusion
+This project shifts the focus from pure prediction to business decision-making by integrating churn probability with customer value. The ultimate goal is to maximize profit through intelligent and cost-effective customer retention strategies.
+
