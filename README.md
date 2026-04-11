@@ -6,3 +6,11 @@ However, not all customers contribute equally to business value. Some customers 
 Traditional churn prediction focuses on identifying whether a customer will churn. However, this approach is incomplete from a business perspective.
 The key challenge is:
 >How can the company identify which customers are worth retaining and allocate retention resources efficiently to maximize profit?
+
+## 3. Business Needs
+The business does not simply require a high-accuracy model. Instead, it needs:
+* Identification of high-risk customers (likely to churn)
+Evaluation of customer value (e.g., revenue contribution, lifetime value)
+Decision-making support on:
+Whether to retain a customer
+How much to invest in retention efforts
