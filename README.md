@@ -10,7 +10,7 @@ The key challenge is:
 ## 3. Business Needs
 The business does not simply require a high-accuracy model. Instead, it needs:
 * Identification of high-risk customers (likely to churn)
-Evaluation of customer value (e.g., revenue contribution, lifetime value)
-Decision-making support on:
-Whether to retain a customer
-How much to invest in retention efforts
+* Evaluation of customer value (e.g., revenue contribution, lifetime value)
+* Decision-making support on:
+  >Whether to retain a customer
+  >How much to invest in retention efforts
