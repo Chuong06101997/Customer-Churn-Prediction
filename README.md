@@ -13,4 +13,12 @@ The business does not simply require a high-accuracy model. Instead, it needs:
 * Evaluation of customer value (e.g., revenue contribution, lifetime value)
 * Decision-making support on:
   >Whether to retain a customer
-  > How much to invest in retention efforts
+  >How much to invest in retention efforts
+
+## 4. Key Insight
+Not all churn events have the same impact:
+Losing a high-value customer results in significant revenue loss
+Losing a low-value customer may have minimal impact
+Retaining a low-value or unprofitable customer may lead to unnecessary costs
+Therefore:
+>The goal is not to minimize churn, but to optimize retention decisions for maximum business value.
