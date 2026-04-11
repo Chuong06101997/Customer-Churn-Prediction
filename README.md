@@ -48,3 +48,20 @@ This project combines:
 * High churn risk + high value → prioritize retention
 * High churn risk + low value → consider limited or no intervention
 * Low churn risk → no immediate action required
+
+## 6. Evaluation Metrics
+
+Instead of relying solely on machine learning metrics such as accuracy or AUC, this project emphasizes business-oriented metrics:
+
+6.1 Expected Profit
+
+Profit is defined as:
+
+Revenue retained from customers who would have churned
+Minus the cost of retention actions (e.g., discounts, promotions)
+
+6.2 Retention ROI
+
+Return on investment for retention strategies:
+
+Measures whether the cost of retaining customers is justified by the revenue preserved
