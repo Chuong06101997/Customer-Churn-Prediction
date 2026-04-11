@@ -65,3 +65,13 @@ Minus the cost of retention actions (e.g., discounts, promotions)
 Return on investment for retention strategies:
 
 Measures whether the cost of retaining customers is justified by the revenue preserved
+
+## 7. Decision Perspective (Cost-Sensitive Thinking)
+
+Each prediction outcome has a different business impact:
+
+* Correctly identifying a high-value churner → high positive impact
+* Incorrectly targeting a non-churner → unnecessary cost
+* Missing a high-value churner → significant revenue loss
+
+Thus, the model is evaluated not only on predictive performance but also on its economic impact.
