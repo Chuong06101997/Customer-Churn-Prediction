@@ -13,4 +13,4 @@ The business does not simply require a high-accuracy model. Instead, it needs:
 * Evaluation of customer value (e.g., revenue contribution, lifetime value)
 * Decision-making support on:
   >Whether to retain a customer
-  >How much to invest in retention efforts
+  > How much to invest in retention efforts
