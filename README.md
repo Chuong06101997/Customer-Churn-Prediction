@@ -37,6 +37,7 @@ This project combines:
 
 5.1 Churn Prediction
 * Estimate the probability of each customer churning
+  
 5.2 Customer Value Assessment
   
   Approximate customer value using:
@@ -45,6 +46,7 @@ This project combines:
 * Tenure
 * Total Charges
 * Optionally extend to Customer Lifetime Value (CLV)
+  
 5.3 Decision Framework
   
   Retention decisions are made based on both churn risk and customer value:
