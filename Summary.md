@@ -1,77 +1,46 @@
-Customer Churn Prediction & Business Optimization
-📌 Project Overview
+# Customer Churn Prediction & Profit Optimization
+## 1. Project Overview
 
-Customer churn là vấn đề quan trọng trong ngành viễn thông, nơi doanh nghiệp có nguy cơ mất khách hàng và doanh thu nếu không có chiến lược giữ chân phù hợp. Churn được định nghĩa là việc khách hàng ngừng sử dụng dịch vụ trong tháng gần nhất.
+Customer churn là một trong những vấn đề quan trọng trong ngành viễn thông, ảnh hưởng trực tiếp đến doanh thu và chi phí marketing. Tuy nhiên, không phải tất cả khách hàng đều cần được giữ lại.
 
-Mục tiêu của dự án này không chỉ dừng lại ở việc dự đoán churn, mà tập trung vào việc:
+Dự án này tập trung vào việc:
 
-Hiểu hành vi khách hàng
-Xác định yếu tố ảnh hưởng churn
-Tối ưu quyết định giữ khách dựa trên lợi nhuận
-🎯 Business Objective
-Dự đoán xác suất churn của từng khách hàng
-Xác định nhóm khách hàng có nguy cơ rời bỏ cao
-Tính toán giá trị kinh tế của từng khách hàng
-Đưa ra quyết định giữ hay không giữ dựa trên Expected Profit
-📂 Dataset Description
+Dự đoán xác suất churn của khách hàng
+Đánh giá giá trị kinh tế của từng khách hàng
+Hỗ trợ quyết định giữ chân dựa trên lợi nhuận kỳ vọng
 
-Dataset bao gồm 7043 khách hàng với 21 biến, bao gồm:
+## 2. Business Problem
 
-Thông tin nhân khẩu học (gender, SeniorCitizen, Partner, Dependents)
-Thông tin dịch vụ (InternetService, TechSupport, Streaming, …)
-Thông tin tài khoản (Contract, PaymentMethod, MonthlyCharges, TotalCharges)
-Biến mục tiêu: Churn (Yes/No)
+Doanh nghiệp thường cố gắng giảm churn bằng mọi giá, dẫn đến chi phí retention cao nhưng hiệu quả không tối ưu.
 
-Mỗi dòng đại diện cho một khách hàng và hành vi sử dụng dịch vụ của họ.
+Vấn đề cốt lõi:
 
-🔍 Key Insights
-Khách hàng có tenure thấp dễ churn hơn → churn xảy ra ở giai đoạn đầu
-MonthlyCharges cao làm tăng khả năng churn
-Khách hàng dùng Fiber Optic có churn cao nhất
-Contract dài hạn giúp giảm churn đáng kể
-TechSupport là yếu tố giữ chân mạnh
+Nên giữ khách hàng nào để tối đa hóa lợi nhuận?
 
-👉 Nhóm nguy cơ cao:
-khách hàng mới + phí cao + contract ngắn
+## 3. Methodology
 
-🤖 Modeling Approach
-Model chính: Logistic Regression
-Output: xác suất churn (probability)
+### 3.1 Data Processing
+Làm sạch dữ liệu: xử lý kiểu dữ liệu, missing values, duplicate
+Encoding biến categorical
+Kiểm tra phân phối và outliers
 
-Lý do chọn Logistic Regression:
+### 3.2 Exploratory Data Analysis
 
-Dễ giải thích (coef, odds ratio)
+Phân tích các yếu tố ảnh hưởng đến churn:
+
+Tenure (thời gian sử dụng)
+MonthlyCharges (chi phí hàng tháng)
+Contract (loại hợp đồng)
+InternetService, TechSupport
+
+### 3.3 Modeling
+
+Sử dụng Logistic Regression để dự đoán xác suất churn
+Lý do lựa chọn:
+Dễ diễn giải (interpretability)
 Phù hợp bài toán business decision
-Cung cấp xác suất trực tiếp để tính profit
-📈 Model Evaluation
-Accuracy: ~76%
-Recall (churn): cao → giảm bỏ sót khách churn
-F1-score: cân bằng giữa precision và recall
-
-👉 Không tối ưu accuracy mà tối ưu khả năng phát hiện churn có giá trị
-
-💰 Business Decision Framework
-
-Dự án không dừng ở prediction mà đi đến quyết định:
-
-1. Tính xác suất churn
-
-→ từ model
-
-2. Ước tính giá trị khách hàng
-Customer Value ≈ MonthlyCharges × Expected Tenure
-3. Tính Expected Profit
-Expected Profit = P(Churn) × Customer Value − Retention Cost
-🎯 Final Strategy
-Nếu Expected Profit > 0
-→ nên giữ khách (invest retention)
-Nếu Expected Profit < 0
-→ không cần giữ (tối ưu chi phí)
-
-👉 Không giữ tất cả khách hàng
-👉 Chỉ giữ khách hàng có giá trị
-
-🚀 Key Takeaway
-
-Mục tiêu của bài toán không phải là giảm churn bằng mọi giá,
-mà là giữ đúng khách hàng để tối ưu lợi nhuận.
+Trả về xác suất (probability) phục vụ tính toán kinh tế
+### 3.4 Model Evaluation
+Accuracy ~76%
+Recall tập trung vào lớp churn
+F1-score để cân bằng precision và recall
