@@ -68,7 +68,7 @@ Mặc dù hệ số của MonthlyCharges là dương, phân tích EDA cho thấy
 20–40: churn thấp, tăng nhẹ
 40–60: dao động, chưa rõ xu hướng
 60–90: churn tăng mạnh → vùng rủi ro cao nhất
->90: churn giảm nhẹ
+> 90: churn giảm nhẹ
 
 Điều này cho thấy tồn tại threshold effect (~60), nơi khách hàng bắt đầu trở nên nhạy cảm với giá.
 
@@ -106,7 +106,7 @@ Giá trị khách hàng mới được ước tính dựa trên:
 <img width="461" height="71" alt="image" src="https://github.com/user-attachments/assets/bbd96d7e-5251-4dca-b244-7ac6a3999f8d" />
 
 
-## 5.2 Expected Profit
+## 6.2 Expected Profit
 
 Quyết định giữ khách dựa trên:
 
@@ -114,7 +114,7 @@ Quyết định giữ khách dựa trên:
 <img width="586" height="67" alt="image" src="https://github.com/user-attachments/assets/db7866c7-3f18-4d64-a0b3-fa5272ce6de6" />
 
 
-# 6. Decision Strategy
+# 7. Decision Strategy
 
 Nếu Expected Profit > 0
 → Nên giữ khách hàng
@@ -123,7 +123,7 @@ Nếu Expected Profit < 0
 
 Tập trung nguồn lực vào khách hàng mang lại giá trị thực
 
-# 7. Conclusion
+# 8. Conclusion
 
 Dự án cho thấy rằng:
 
