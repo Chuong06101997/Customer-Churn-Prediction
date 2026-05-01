@@ -106,13 +106,16 @@ Không phải tất cả biến có coef lớn đều mang ý nghĩa nhân quả
 
 Giá trị khách hàng mới được ước tính dựa trên:
 
-Customer Value ≈ MonthlyCharges × Expected Tenure
+<img width="461" height="71" alt="image" src="https://github.com/user-attachments/assets/bbd96d7e-5251-4dca-b244-7ac6a3999f8d" />
+
 
 ## 5.2 Expected Profit
 
 Quyết định giữ khách dựa trên:
 
-Expected Profit = P(Churn) × Customer Value − Retention Cost
+
+<img width="586" height="67" alt="image" src="https://github.com/user-attachments/assets/db7866c7-3f18-4d64-a0b3-fa5272ce6de6" />
+
 
 # 6. Decision Strategy
 
