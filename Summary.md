@@ -95,12 +95,43 @@ Mặc dù hệ số của MonthlyCharges là dương, phân tích EDA cho thấy
 Churn giảm mạnh trong giai đoạn 0–10 tháng
 Sau đó, xu hướng giảm chậm lại và dần ổn định
 
- Điều này cho thấy:
-
-Giai đoạn đầu (0–10 tháng) là critical period
-Nếu khách vượt qua giai đoạn này → khả năng ở lại rất cao
 ### 4.4 Key Business 
 MonthlyCharges là driver chính của churn, đặc biệt sau ngưỡng ~60
 Tenure là yếu tố giữ khách mạnh nhất, đặc biệt trong giai đoạn đầu
 Các dịch vụ bổ sung như TechSupport giúp tăng retention
 Không phải tất cả biến có coef lớn đều mang ý nghĩa nhân quả (ví dụ: PhoneService cần kiểm chứng thêm)
+
+# 5. Business Framework
+## 5.1 Customer Value Estimation
+
+Giá trị khách hàng mới được ước tính dựa trên:
+
+Customer Value ≈ MonthlyCharges × Expected Tenure
+
+## 5.2 Expected Profit
+
+Quyết định giữ khách dựa trên:
+
+Expected Profit = P(Churn) × Customer Value − Retention Cost
+
+# 6. Decision Strategy
+
+Nếu Expected Profit > 0
+→ Nên giữ khách hàng
+Nếu Expected Profit < 0
+→ Không cần đầu tư giữ chân
+
+Tập trung nguồn lực vào khách hàng mang lại giá trị thực
+
+# 7. Conclusion
+
+Dự án cho thấy rằng:
+
+Churn prediction chỉ là bước đầu
+Giá trị thực nằm ở việc kết hợp xác suất churn với giá trị khách hàng
+Quyết định giữ chân nên dựa trên lợi nhuận kỳ vọng, không phải tỷ lệ churn đơn thuần
+
+Giai đoạn đầu (0–10 tháng) là critical period
+Nếu khách vượt qua giai đoạn này → khả năng ở lại rất cao
+
+
