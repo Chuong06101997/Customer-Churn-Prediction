@@ -56,30 +56,11 @@ Kết quả này cho thấy mô hình có khả năng dự đoán churn ở mứ
 
 ### 4.1 Key Drivers from Logistic Regression
 Biến làm tăng churn
-MonthlyCharges (+3.40)
-→ yếu tố ảnh hưởng mạnh nhất
-→ chi phí càng cao → churn tăng mạnh
-PaymentMethod – Electronic Check (+0.46)
-→ nhóm thanh toán này có xu hướng churn cao hơn
-PaperlessBilling (+0.42)
-→ có thể liên quan đến nhóm khách hàng nhạy cảm giá
-SeniorCitizen (+0.32)
-→ nhóm khách lớn tuổi có xu hướng churn cao hơn
-MultipleLines (+0.20)
-→ sử dụng nhiều dịch vụ có thể dẫn đến chi phí cao → tăng churn
- Biến giúp giảm churn
-Tenure (−3.39)
-→ yếu tố mạnh nhất giúp giữ khách
-→ khách hàng gắn bó lâu → rất khó churn
-PhoneService (−1.11)
-→ có xu hướng giảm churn (cần kiểm chứng thêm với EDA)
-TechSupport (−0.71)
-→ hỗ trợ kỹ thuật giúp giữ khách hiệu quả
-OnlineBackup (−0.29)
-DeviceProtection (−0.25)
-→ các dịch vụ bổ sung giúp tăng sự gắn bó
-Dependents (−0.25)
-→ khách có gia đình có xu hướng ổn định hơn
+
+MonthlyCharges là yếu tố làm tăng churn mạnh nhất với hệ số +3.40, cho thấy chi phí hàng tháng có tác động rất lớn đến xác suất rời bỏ của khách hàng.
+
+Ngược lại, Tenure là yếu tố giúp giảm churn mạnh nhất với hệ số −3.39, phản ánh rằng khách hàng càng gắn bó lâu thì khả năng rời bỏ càng thấp.
+
 ### 4.2 Insight – MonthlyCharges (Non-linear Effect)
 
 Mặc dù hệ số của MonthlyCharges là dương, phân tích EDA cho thấy mối quan hệ không hoàn toàn tuyến tính:
