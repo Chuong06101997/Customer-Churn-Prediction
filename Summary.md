@@ -1,131 +1,74 @@
 # Customer Churn Prediction & Profit Optimization
+## Executive Summary
 
-## 1. Project Overview
+Trong ngành viễn thông, việc mất khách hàng (churn) ảnh hưởng trực tiếp đến doanh thu. Tuy nhiên, không phải tất cả khách hàng đều đáng để giữ lại.
 
-Customer churn là một trong những vấn đề quan trọng trong ngành viễn thông, ảnh hưởng trực tiếp đến doanh thu và chi phí marketing. Tuy nhiên, không phải tất cả khách hàng đều cần được giữ lại.
+Dự án này xây dựng mô hình dự đoán churn với accuracy 75.7% và khả năng phát hiện 78% khách hàng có nguy cơ rời bỏ, từ đó kết hợp với giá trị khách hàng để đưa ra quyết định giữ chân dựa trên lợi nhuận.
 
-Dự án này tập trung vào việc:
+## Business Problem
 
-Dự đoán xác suất churn của khách hàng
-Đánh giá giá trị kinh tế của từng khách hàng
-Hỗ trợ quyết định giữ chân dựa trên lợi nhuận kỳ vọng
+Thông thường, doanh nghiệp cố gắng giảm churn bằng mọi giá. Tuy nhiên, cách tiếp cận này dễ dẫn đến chi phí giữ chân cao nhưng hiệu quả không tối ưu.
 
-## 2. Business Problem
+Vấn đề thực sự cần giải quyết là:
 
-Doanh nghiệp thường cố gắng giảm churn bằng mọi giá, dẫn đến chi phí retention cao nhưng hiệu quả không tối ưu.
+Khách hàng nào nên giữ để tối đa hóa lợi nhuận ?
 
-Vấn đề cốt lõi:
+## Key Results
 
-Nên giữ khách hàng nào để tối đa hóa lợi nhuận?
+Mô hình Logistic Regression cho thấy hai yếu tố quan trọng nhất:
 
-## 3. Methodology
+MonthlyCharges (+3.40): yếu tố làm tăng churn mạnh nhất
+Tenure (−3.39): yếu tố giúp giảm churn mạnh nhất
 
-### 3.1 Data Processing
-Làm sạch dữ liệu: xử lý kiểu dữ liệu, missing values, duplicate
-Encoding biến categorical
-Kiểm tra phân phối và outliers
+Điều này cho thấy churn chủ yếu bị chi phối bởi giá dịch vụ và thời gian gắn bó của khách hàng.
 
-### 3.2 Exploratory Data Analysis
+## Key Insights
+### 1. Pricing Effect – MonthlyCharges
 
-Phân tích các yếu tố ảnh hưởng đến churn:
+Phân tích cho thấy churn không tăng đều theo giá mà có một ngưỡng rõ ràng:
 
-Tenure (thời gian sử dụng)
-MonthlyCharges (chi phí hàng tháng)
-Contract (loại hợp đồng)
-InternetService, TechSupport
+Từ 60 trở lên, churn tăng mạnh
+Cao nhất trong khoảng 60–90
 
-### 3.3 Modeling
+→ Điều này cho thấy khách hàng bắt đầu trở nên nhạy cảm với giá sau một mức nhất định (pricing threshold)
 
-Sử dụng Logistic Regression để dự đoán xác suất churn
-Lý do lựa chọn:
-Dễ diễn giải (interpretability)
-Phù hợp bài toán business decision
-Trả về xác suất (probability) phục vụ tính toán kinh tế
-### 3.4 Model Evaluation
-Accuracy 75.7%
-Recall tập trung vào lớp churn
-F1-score để cân bằng precision và recall
+### 2. Customer Lifecycle – Tenure
+Churn giảm rất nhanh trong 0–10 tháng đầu
+Sau đó gần như ổn định
 
-## 4. Model Performance
+→ Giai đoạn đầu là critical period, nếu giữ được khách trong giai đoạn này thì khả năng họ ở lại rất cao
 
-Mô hình Logistic Regression đạt:
+Model Performance
 
-Accuracy: 75.7%
+Mô hình đạt recall = 0.78, nghĩa là bắt được phần lớn khách hàng churn.
 
-Kết quả này cho thấy mô hình có khả năng dự đoán churn ở mức khá tốt, đồng thời vẫn giữ được tính diễn giải cao để phục vụ phân tích business.
+Mặc dù precision không cao, điều này là chấp nhận được vì:
 
-### 4.1 Key Drivers from Logistic Regression
-Biến làm tăng churn
+Chi phí giữ một khách hàng thấp hơn chi phí tìm khách hàng mới
 
-MonthlyCharges là yếu tố làm tăng churn mạnh nhất với hệ số +3.40, cho thấy chi phí hàng tháng có tác động rất lớn đến xác suất rời bỏ của khách hàng.
+Do đó, mô hình được thiết kế để ưu tiên không bỏ sót churn, ngay cả khi phải chấp nhận một số dự đoán nhầm.
 
-Ngược lại, Tenure là yếu tố giúp giảm churn mạnh nhất với hệ số −3.39, phản ánh rằng khách hàng càng gắn bó lâu thì khả năng rời bỏ càng thấp.
+Business Framework
 
-### 4.2 Insight – MonthlyCharges (Non-linear Effect)
+Thay vì chỉ dự đoán churn, dự án đi thêm một bước:
 
-Mặc dù hệ số của MonthlyCharges là dương, phân tích EDA cho thấy mối quan hệ không hoàn toàn tuyến tính:
+Customer Value
+Customer Value ≈ MonthlyCharges × Expected Tenure
+Expected Profit
+Expected Profit = P(Churn) × Customer Value − Retention Cost
+Decision Strategy
+Nếu Expected Profit > 0 → nên giữ khách
+Nếu Expected Profit < 0 → không cần đầu tư
 
-20–40: churn thấp, tăng nhẹ
-40–60: dao động, chưa rõ xu hướng
-60–90: churn tăng mạnh → vùng rủi ro cao nhất
-> 90: churn giảm nhẹ
+→ Tập trung nguồn lực vào đúng khách hàng, không phải tất cả khách hàng
 
-Điều này cho thấy tồn tại threshold effect (~60), nơi khách hàng bắt đầu trở nên nhạy cảm với giá.
-
-### 4.3 Insight – Tenure (Customer Lifecycle Effect)
-Churn giảm mạnh trong giai đoạn 0–10 tháng
-Sau đó, xu hướng giảm chậm lại và dần ổn định
-
-### 4.4 Key Business 
-MonthlyCharges là driver chính của churn, đặc biệt sau ngưỡng ~60
-Tenure là yếu tố giữ khách mạnh nhất, đặc biệt trong giai đoạn đầu
-Các dịch vụ bổ sung như TechSupport giúp tăng retention
-Không phải tất cả biến có coef lớn đều mang ý nghĩa nhân quả (ví dụ: PhoneService cần kiểm chứng thêm)
-
-### 5. Confusion Matrix
-
-<img width="103" height="48" alt="image" src="https://github.com/user-attachments/assets/d4b7e713-8d98-421b-a723-15c0b8e5164f" />
-
-791 → dự đoán đúng khách không churn
-273 → dự đoán đúng khách churn
-262 → dự đoán nhầm (tưởng churn nhưng không churn)
-79 → bỏ sót khách churn (nguy hiểm nhất)
-
-<img width="438" height="150" alt="image" src="https://github.com/user-attachments/assets/119d9205-7f16-4560-b607-4dad5eebd339" />
-
-=> Mô hình ưu tiên khả năng phát hiện khách hàng churn, với recall đạt 0.78, nghĩa là mô hình có thể xác định được 78% khách hàng có nguy cơ rời bỏ. Điều này đặc biệt quan trọng trong bối cảnh kinh doanh, vì việc bỏ sót khách hàng churn có thể dẫn đến mất doanh thu trực tiếp.
-Precision thấp là do mô hình ưu tiên phát hiện tối đa khách hàng churn (recall cao), dẫn đến việc dự đoán dư và làm tăng số lượng dự đoán sai (false positives).
-Tuy nhiên, điều này là hợp lý trong bối cảnh kinh doanh, vì chi phí giữ chân một khách hàng thường thấp hơn chi phí tìm kiếm khách hàng mới.
-Do đó, việc dự đoán nhầm một số khách hàng không churn (false positive) vẫn chấp nhận được, miễn là mô hình hạn chế tối đa việc bỏ sót khách hàng thực sự có nguy cơ rời bỏ
-
-# 6. Business Framework
-## 6.1 Customer Value Estimation
-
-Giá trị khách hàng mới được ước tính dựa trên:
-
-<img width="461" height="71" alt="image" src="https://github.com/user-attachments/assets/bbd96d7e-5251-4dca-b244-7ac6a3999f8d" />
-
-
-## 6.2 Expected Profit
-
-Quyết định giữ khách dựa trên:
-
-
-<img width="586" height="67" alt="image" src="https://github.com/user-attachments/assets/db7866c7-3f18-4d64-a0b3-fa5272ce6de6" />
-
-
-# 7. Decision Strategy
-
-Nếu Expected Profit > 0
-→ Nên giữ khách hàng
-Nếu Expected Profit < 0
-→ Không cần đầu tư giữ chân
-
-Tập trung nguồn lực vào khách hàng mang lại giá trị thực
-
-# 8. Conclusion
+Conclusion
 
 Dự án cho thấy rằng:
+
+Dự đoán churn chỉ là bước đầu
+Giá trị thực nằm ở việc kết hợp xác suất churn + giá trị khách hàng
+Quyết định giữ chân nên dựa trên lợi nhuận, không phải tỷ lệ churn
 
 Churn prediction chỉ là bước đầu
 Giá trị thực nằm ở việc kết hợp xác suất churn với giá trị khách hàng
