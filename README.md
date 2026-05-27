@@ -45,11 +45,15 @@ Churn rate: ~26.5%
 Approach
 Churn Prediction
 Logistic Regression trained on 80% of data, evaluated on 20% holdout set.
+
 Feature selection based on statistical significance (p-value < 0.05) from statsmodels summary — used to interpret coefficient direction and magnitude, while sklearn handles prediction pipeline.
+
 Customer Value Estimation
 Customer Value = MonthlyCharges × RETENTION_MONTHS (3)
 Represents expected revenue if the customer is retained for 3 months following intervention.
 Expected Profit Framework
+
 Expected Profit = P(Churn) × Customer Value − (Retention Cost × Retention Months)
                 = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
+                
 → Retain if Expected Profit > 0
