@@ -108,6 +108,14 @@ Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at defaul
   
 <img width="598" height="565" alt="image" src="https://github.com/user-attachments/assets/0d489ddb-cb60-41a3-a48f-8d3c2aff5583" />
 
+### Monthly Charges and Churn Relationship
+
+MonthlyCharges is the strongest positive churn driver in the MinMax-scaled Logistic Regression model (coefficient = +3.40), indicating that higher monthly costs are strongly associated with increased churn risk.
+
+The LOWESS plot provides additional context by showing that churn risk does not increase linearly. Churn remains relatively low at lower price ranges, rises sharply between approximately $70–100/month, and then declines again at the highest pricing tiers.
+
+This suggests that mid-to-high paying customers may perceive weaker value-for-money relative to premium-tier customers. The result may indicate a pricing or plan-positioning issue worth further business investigation.
+
 <img width="765" height="637" alt="image" src="https://github.com/user-attachments/assets/7046f3fd-9b56-45c6-9e73-93ad06b0eb84" />
 
 ### Tenure and Churn Relationship
