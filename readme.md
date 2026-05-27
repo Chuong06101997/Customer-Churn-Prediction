@@ -71,7 +71,7 @@ Instead of default threshold 0.5, sweep thresholds from 0.10 to 0.85 and minimiz
 ```
 Total Cost = (FN × $100) + (FP × $20)
 ```
-Missing a churner costs $100 to replace. A false alarm costs $20 to retain unnecessarily. This asymmetry means **recall matters more than precision.**
+Missing a churner costs $100 to replace. A false alarm costs $20 to retain unnecessarily. Given the higher cost of missed churners, the model prioritizes recall over precision
 
 ---
 
@@ -96,12 +96,18 @@ Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at defaul
 > Accuracy is lower than a naive baseline. That's expected — the model trades accuracy for lower total business cost. One missed churner costs 5× more than one false alarm.
 
 **Top churn drivers (MinMaxScaler coefficients):**
+
+<img width="785" height="478" alt="image" src="https://github.com/user-attachments/assets/b5dbb475-cc4e-470c-9354-bb957835bd7d" />
+
 - MonthlyCharges: **+3.40** — strongest driver of churn
 - tenure: **−3.39** — strongest protective factor
 - PhoneService: −1.11
 - TechSupport: −0.71
 - Electronic check payment: +0.46
 - Paperless billing: +0.43
+  
+<img width="598" height="565" alt="image" src="https://github.com/user-attachments/assets/0d489ddb-cb60-41a3-a48f-8d3c2aff5583" />
+<img width="765" height="637" alt="image" src="https://github.com/user-attachments/assets/7046f3fd-9b56-45c6-9e73-93ad06b0eb84" />
 
 **Customer segmentation:**
 
