@@ -53,6 +53,7 @@ Nếu Expected Profit > 0 thì nên giữ. Nếu ≤ 0 thì không cần đầu 
 
 ### Customer Segmentation
 Dựa trên churn probability (ngưỡng 0.30) và customer value median, 1,405 khách hàng được chia thành 4 nhóm. Nhóm High Risk – High Value gồm 367 khách cần được ưu tiên giữ chân vì có ROI cao nhất. Nhóm High Risk – Low Value gồm 168 khách nên hạn chế hoặc không can thiệp. Nhóm Low Risk – High Value gồm 336 khách cần theo dõi và duy trì quan hệ. Nhóm Low Risk – Low Value gồm 534 khách không cần hành động ngay.
+
 Về expected profit, với retention cost $20/tháng trong 3 tháng, có 512 khách hàng đáng giữ và 893 khách hàng không đáng đầu tư ở cấu trúc chi phí hiện tại.
 
 Limitations & Assumptions
