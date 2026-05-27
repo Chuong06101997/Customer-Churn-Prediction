@@ -15,6 +15,7 @@ Kết hợp xác suất churn với giá trị khách hàng để xây dựng re
 ---
 
 ### Key Results
+#### Model Summary
 Hai yếu tố tác động mạnh nhất ngược chiều nhau: MonthlyCharges tăng churn mạnh nhất (coefficient +3.40) trong khi tenure giảm churn mạnh nhất (−3.39). Các yếu tố giảm churn khác gồm PhoneService (−1.11) và TechSupport_Yes (−0.71). Ngược lại, PaymentMethod_Electronic check (+0.46) và PaperlessBilling (+0.43) có tương quan dương với churn.
 Kết quả này được rút ra từ MinMaxScaler model — scale tất cả biến về [0,1] để coefficients có thể so sánh trực tiếp về magnitude. Ba model statsmodels được chạy song song để cross-check:
 
