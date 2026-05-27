@@ -26,12 +26,17 @@ Sweep threshold từ 0.10 đến 0.85 cho thấy threshold 0.15 đạt tổng ch
 
 ### Business Framework
 Customer Value
-Customer Value = MonthlyCharges × 3
+
+<img width="391" height="48" alt="image" src="https://github.com/user-attachments/assets/e4f02b80-269e-4b01-9f97-13d46ad43938" />
+
+
 Đại diện cho revenue kỳ vọng nếu giữ được khách thêm 3 tháng sau can thiệp.
 
 ### Expected Profit
-Expected Profit = P(Churn) × Customer Value − (Retention Cost × 3)
-               = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
+
+<img width="647" height="75" alt="image" src="https://github.com/user-attachments/assets/8e87e2d9-bd85-406c-9f92-8ddaa8c9a857" />
+
+               
 Nếu Expected Profit > 0 thì nên giữ. Nếu ≤ 0 thì không cần đầu tư.
 
 ### Customer Segmentation
