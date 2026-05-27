@@ -107,8 +107,16 @@ Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at defaul
 - Paperless billing: +0.43
   
 <img width="598" height="565" alt="image" src="https://github.com/user-attachments/assets/0d489ddb-cb60-41a3-a48f-8d3c2aff5583" />
+
 <img width="765" height="637" alt="image" src="https://github.com/user-attachments/assets/7046f3fd-9b56-45c6-9e73-93ad06b0eb84" />
 
+### Tenure and Churn Relationship
+
+Tenure shows the strongest negative relationship with churn in the MinMax-scaled Logistic Regression model (coefficient = −3.39), indicating that customers with longer tenure are significantly less likely to churn.
+
+The LOWESS plot supports this result visually. Churn probability is highest during the early customer lifecycle and drops sharply within the first 10 months before stabilizing near zero for long-tenure customers.
+
+This suggests that early-stage customer retention and onboarding may have the highest business impact, since customers who remain beyond the initial months tend to become substantially more stable.
 **Customer segmentation:**
 
 <img width="811" height="537" alt="image" src="https://github.com/user-attachments/assets/23c15fa4-9ff4-452e-89bf-0039948f7013" />
