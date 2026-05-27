@@ -20,9 +20,10 @@ Mô hình đạt recall 0.935 ở threshold 0.15, nghĩa là bắt được 93.5
 Cost-Sensitive Threshold Optimization
 Tổng chi phí được tính theo công thức: 
 
-Total Cost = (FN × $100) + (FP × $20). 
+<img width="367" height="86" alt="image" src="https://github.com/user-attachments/assets/b9c7378a-12a1-455d-be49-cda07c8295b5" />
+ 
 
-Sweep threshold từ 0.10 đến 0.85 cho thấy threshold 0.15 đạt tổng chi phí thấp nhất là $11,260, với recall 0.935, chỉ bỏ sót 23 churner thực sự (FN) và giữ nhầm 448 người (FP). So với threshold mặc định 0.50 có tổng chi phí $18,540, threshold 0.15 tiết kiệm $7,280 trên tập test 1,405 khách hàng.
+Sweep threshold từ 0.10 đến 0.85 cho thấy threshold 0.15 đạt tổng chi phí thấp nhất là $11,260, với recall 0.935, chỉ bỏ sót 23 churner thực sự (FN) và giữ nhầm 448 người (FP). So với threshold mặc định 0.50 có tổng chi phí $ 18,540, threshold 0.15 tiết kiệm $7,280 trên tập test 1,405 khách hàng.
 
 ### Business Framework
 Customer Value
