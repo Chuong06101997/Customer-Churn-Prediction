@@ -12,9 +12,19 @@ Doanh nghiệp cần trả lời hai câu hỏi: ai có khả năng rời bỏ, 
 Kết hợp xác suất churn với giá trị khách hàng để xây dựng retention framework dựa trên lợi nhuận kỳ vọng — không phải churn rate đơn thuần.
 ## Outcome
 Đội retention có framework rõ ràng để phân bổ ngân sách hiệu quả: giữ chân dựa trên expected profit, tập trung vào đúng khách hàng thay vì can thiệp đại trà.
+---
 
 ### Key Results
-Model Performance
+Hai yếu tố tác động mạnh nhất ngược chiều nhau: MonthlyCharges tăng churn mạnh nhất (coefficient +3.40) trong khi tenure giảm churn mạnh nhất (−3.39). Các yếu tố giảm churn khác gồm PhoneService (−1.11) và TechSupport_Yes (−0.71). Ngược lại, PaymentMethod_Electronic check (+0.46) và PaperlessBilling (+0.43) có tương quan dương với churn.
+Kết quả này được rút ra từ MinMaxScaler model — scale tất cả biến về [0,1] để coefficients có thể so sánh trực tiếp về magnitude. Ba model statsmodels được chạy song song để cross-check:
+
+Unscaled: cho thấy direction và statistical significance (p-value) của từng biến — tất cả features đều có p-value < 0.05
+StandardScaler (Z-score): chuẩn hóa theo mean và std — coefficients MonthlyCharges (+1.02) và tenure (−1.16) phản ánh tác động tính theo đơn vị standard deviation
+MinMaxScaler: scale về [0,1] — coefficients MonthlyCharges (+3.40) và tenure (−3.39) cho thấy hai biến này có tác động lớn nhất và gần như cân bằng nhau về magnitude
+
+Việc chạy cả ba scaler xác nhận rằng MonthlyCharges và tenure là hai yếu tố chi phối churn — kết quả nhất quán qua tất cả các cách scale.
+
+#### Model Performance
 Mô hình đạt recall 0.935 ở threshold 0.15, nghĩa là bắt được 93.5% khách hàng thực sự churn. Accuracy ở mức 66% — thấp hơn baseline 74.9% — là có chủ đích: model được tối ưu cho tổng chi phí kinh doanh, không phải accuracy. Bỏ sót 1 churner tốn $100 để tìm khách mới, trong khi giữ nhầm 1 người chỉ tốn $20 — asymmetry này justifies việc ưu tiên recall. Cross-validation 10-fold cho mean accuracy 80.3%, cao hơn test accuracy do CV chạy trên unscaled data — test accuracy là con số đáng tin hơn để report.
 
 Cost-Sensitive Threshold Optimization
