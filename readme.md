@@ -83,6 +83,7 @@ Missing a churner costs $100 to replace. A false alarm costs $20 to retain unnec
 Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at default threshold 0.50. That's a **$7,280 saving** on 1,405 customers, driven by catching 93.5% of churners while accepting more false positives at low cost.
 
 **Model performance at threshold 0.15:**
+
 <img width="487" height="455" alt="image" src="https://github.com/user-attachments/assets/99cc325c-4ae0-4b28-a156-4a1dfc9144cc" />
 
 
