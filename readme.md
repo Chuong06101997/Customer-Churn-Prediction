@@ -7,7 +7,8 @@
 
 ## Executive Summary
 
-Most churn projects stop at "who will leave." This one goes further: **is it actually worth spending money to keep them?**
+Most churn projects stop at "who will leave." This project extends churn prediction by adding a profit optimization framework
+**is it actually worth spending money to keep them?**
 
 Built a Logistic Regression churn model, then layered a profit framework on top — combining churn probability with customer value to decide which customers justify retention spend.
 
