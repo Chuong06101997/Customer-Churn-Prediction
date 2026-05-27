@@ -39,6 +39,9 @@ A major limitation of this approach is that **not every churner generates enough
 - Source: [IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
 - 7,043 customers, 21 features
 - Churn rate: ~26.5%
+  
+<img width="455" height="478" alt="image" src="https://github.com/user-attachments/assets/6e7d1ce9-4829-4fcd-b6b8-412f2e37bb59" />
+
 - Features include tenure, monthly charges, contract type, payment method, and service usage
 
 ---
@@ -75,6 +78,8 @@ Missing a churner costs $100 to replace. A false alarm costs $20 to retain unnec
 
 **Threshold optimization:**
 
+<img width="451" height="305" alt="image" src="https://github.com/user-attachments/assets/9ec503cd-59f1-4723-ace7-117a1cf9b6f8" />
+
 Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at default threshold 0.50. That's a **$7,280 saving** on 1,405 customers, driven by catching 93.5% of churners while accepting more false positives at low cost.
 
 **Model performance at threshold 0.15:**
@@ -94,6 +99,9 @@ Threshold 0.15 minimizes total cost at $11,260 — compared to $18,540 at defaul
 - Paperless billing: +0.43
 
 **Customer segmentation:**
+
+<img width="811" height="537" alt="image" src="https://github.com/user-attachments/assets/23c15fa4-9ff4-452e-89bf-0039948f7013" />
+
 
 | Segment | Count | Action |
 |---|---|---|
