@@ -3,91 +3,53 @@
 <img width="1920" height="1280" alt="image" src="https://github.com/user-attachments/assets/ab986de4-1b8f-460c-8741-2e0dce7c1cfb" />
 
 
-## 1. Context
-In the telecommunications industry, customer acquisition costs are significantly higher than retention costs. Therefore, reducing customer churn is a critical business objective to maintain stable revenue and improve profitability.
-However, not all customers contribute equally to business value. Some customers generate high revenue over time, while others may yield low or even negative returns when considering acquisition and servicing costs.
-## 2. Problem Statement
-Traditional churn prediction focuses on identifying whether a customer will churn. However, this approach is incomplete from a business perspective.
-The key challenge is:
->How can the company identify which customers are worth retaining and allocate retention resources efficiently to maximize profit?
+## Problem Definition
+### 1. Context
+A telecommunications company is losing customers to competitors. The dataset contains 7,043 customers with 21 features including service usage, contract type, billing, and tenure. The company has no systematic way to identify at-risk customers, nor any framework to determine whether a specific customer justifies retention investment.
+Key constraints:
 
-## 3. Business Needs
+Retention budget is limited — cannot intervene with every at-risk customer
+Acquiring a new customer costs ~$100, retaining costs ~$20/month
+Customer value varies widely: monthly charges range from $18 to $119
 
-The business does not simply require a high-accuracy model. Instead, it needs:
+### 2. Need
+The business needs to answer two questions:
 
-* Identification of high-risk customers (likely to churn)
-* Evaluation of customer value (e.g., revenue contribution, lifetime value)
-* Decision-making support on:
-  >Whether to retain a customer
-  >How much to invest in retention efforts
+Who is likely to churn? — identify at-risk customers before they leave
+Who is worth retaining? — allocate budget where it generates positive return
 
-## 4. Key Insight
+The real pain point is not churn rate itself, but inefficient retention spending — missing high-value churners or wasting budget on unprofitable customers.
+### 3. Vision
+Combine churn probability with customer value to build a profit-driven retention framework:
 
-Not all churn events have the same impact:
+Estimate P(churn) per customer via Logistic Regression
+Estimate customer value based on MonthlyCharges × retention horizon
+Calculate expected profit per retention decision
+Segment customers into actionable groups
 
-Losing a high-value customer results in significant revenue loss
-Losing a low-value customer may have minimal impact
-Retaining a low-value or unprofitable customer may lead to unnecessary costs
-Therefore:
->The goal is not to minimize churn, but to optimize retention decisions for maximum business value.
+### 4. Outcome
 
-## 5. Analytical Approach
+Retention team can focus on 367 High Risk – High Value customers with highest ROI
+Cost-optimized threshold (0.15) reduces total business cost to $11,260 vs $18,540 at default threshold (0.50) — saving $7,280
+893 out of 1,405 customers identified as not worth retaining at current cost structure — avoiding unnecessary spend
+Decision-makers get a clear framework: retain based on expected profit, not churn probability alone
 
-This project combines:
 
-5.1 Churn Prediction
-* Estimate the probability of each customer churning
-  
-5.2 Customer Value Assessment
-  
-  Approximate customer value using:
-  
-* Monthly Charges
-* Tenure
-* Total Charges
-* Optionally extend to Customer Lifetime Value (CLV)
-  
-5.3 Decision Framework
-  
-  Retention decisions are made based on both churn risk and customer value:
-  
-* High churn risk + high value → prioritize retention
-* High churn risk + low value → consider limited or no intervention
-* Low churn risk → no immediate action required
+Dataset
 
-## 6. Evaluation Metrics
+Source: IBM Telco Customer Churn
+7,043 customers, 21 features
+Churn rate: ~26.5%
 
-Instead of relying solely on machine learning metrics such as accuracy or AUC, this project emphasizes business-oriented metrics:
 
-6.1 Expected Profit
-
-Profit is defined as:
-
-Revenue retained from customers who would have churned
-Minus the cost of retention actions (e.g., discounts, promotions)
-
-6.2 Retention ROI
-
-Return on investment for retention strategies:
-
-Measures whether the cost of retaining customers is justified by the revenue preserved
-
-## 7. Decision Perspective (Cost-Sensitive Thinking)
-
-Each prediction outcome has a different business impact:
-
-* Correctly identifying a high-value churner → high positive impact
-* Incorrectly targeting a non-churner → unnecessary cost
-* Missing a high-value churner → significant revenue loss
-
-Thus, the model is evaluated not only on predictive performance but also on its economic impact.
-
-## 8. Outcome
-The expected outcomes of this project include:
-* Improved prioritization of customers for retention campaigns
-* More efficient allocation of marketing and retention budgets
-* Increased overall profitability through targeted interventions.
-
-## 9. Conclusion
-This project shifts the focus from pure prediction to business decision-making by integrating churn probability with customer value. The ultimate goal is to maximize profit through intelligent and cost-effective customer retention strategies.
-
+Approach
+Churn Prediction
+Logistic Regression trained on 80% of data, evaluated on 20% holdout set.
+Feature selection based on statistical significance (p-value < 0.05) from statsmodels summary — used to interpret coefficient direction and magnitude, while sklearn handles prediction pipeline.
+Customer Value Estimation
+Customer Value = MonthlyCharges × RETENTION_MONTHS (3)
+Represents expected revenue if the customer is retained for 3 months following intervention.
+Expected Profit Framework
+Expected Profit = P(Churn) × Customer Value − (Retention Cost × Retention Months)
+                = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
+→ Retain if Expected Profit > 0
