@@ -4,8 +4,11 @@ Stack: Python · Pandas · Scikit-learn · Statsmodels · Matplotlib · Seaborn
 What This Project Is
 A churn prediction model that goes one step further: instead of just flagging at-risk customers, it calculates whether retaining each customer is actually profitable.
 Core insight: not every churner is worth retaining.
+Key Results: 
+<img width="484" height="441" alt="image" src="https://github.com/user-attachments/assets/b875b613-df24-4aa7-8169-49402dafeb28" />
 
-<img width="826" height="387" alt="image" src="https://github.com/user-attachments/assets/fc633516-acb5-4f16-82fb-3741cb0b8da6" />
+<img width="803" height="333" alt="image" src="https://github.com/user-attachments/assets/61bbd781-ac71-4380-92f5-2da07080b227" />
+
 
 Why This Is Different From a Typical Churn Model
 Most churn models output a probability and stop there. This project adds two layers:
