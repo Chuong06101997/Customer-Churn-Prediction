@@ -27,6 +27,9 @@ In this business context:
 The cost ratio is 5:1. Under this asymmetry, the optimal threshold shifts toward catching more churners, even at the expense of more false alarms.
 Sweeping thresholds from 0.10 to 0.85 and computing Total Cost = (FN × $100) + (FP × $20) at each point shows that total cost is minimized at threshold 0.15 ($11,260), compared to $18,540 at the default threshold. The $7,280 difference is the direct business value of threshold optimization.
 At threshold 0.15, the model catches 93.5% of actual churners (recall = 0.935) while flagging 448 false positives — each costing only $20 to act on unnecessarily.
+
+<img width="461" height="293" alt="image" src="https://github.com/user-attachments/assets/3203b923-bb85-46ae-b12e-04caaa8eb26c" />
+
 ## Why Expected Profit Instead of Churn Rate
 Churn rate tells you who is leaving. It does not tell you whether stopping them is worth the cost.
 Expected profit reframes the retention decision as a financial calculation:
