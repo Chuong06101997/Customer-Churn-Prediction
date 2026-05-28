@@ -30,13 +30,19 @@ At threshold 0.15, the model catches 93.5% of actual churners (recall = 0.935) w
 ## Why Expected Profit Instead of Churn Rate
 Churn rate tells you who is leaving. It does not tell you whether stopping them is worth the cost.
 Expected profit reframes the retention decision as a financial calculation:
-Expected Profit = P(Churn) × Customer Value − Retention Cost
+
+<img width="600" height="128" alt="image" src="https://github.com/user-attachments/assets/f8e4125e-8fb8-45f1-b528-b317bb889ebf" />
+
 Customer Value = MonthlyCharges × 3
 Retention Cost = $20 × 3 = $60
 A customer with P(Churn) = 0.75 and MonthlyCharges = $53.85:
-Expected Profit = 0.75 × $161.55 − $60 = $61.16 → retain
+
+<img width="580" height="70" alt="image" src="https://github.com/user-attachments/assets/c85bc8da-c3d8-4be3-94d4-d87e3fbacbf1" />
+
 A customer with P(Churn) = 0.40 and MonthlyCharges = $18:
-Expected Profit = 0.40 × $54 − $60 = −$38.40 → skip
+
+<img width="818" height="70" alt="image" src="https://github.com/user-attachments/assets/5e724525-ae30-4cb0-9e98-a040ff72f6f4" />
+
 The second customer has meaningful churn risk but is not worth the intervention. A model that treats both the same wastes budget.
 Applied to the full test set, 512 customers show positive expected profit. The remaining 893 do not justify retention spend under current cost assumptions.
 
