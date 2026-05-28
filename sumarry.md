@@ -50,9 +50,15 @@ The second customer has meaningful churn risk but is not worth the intervention.
 Applied to the full test set, 512 customers show positive expected profit. The remaining 893 do not justify retention spend under current cost assumptions.
 
 ## What the EDA Findings Mean for Business
+
+<img width="598" height="565" alt="image" src="https://github.com/user-attachments/assets/7af3eee6-4f65-4b90-bafc-027960346817" />
+
 MonthlyCharges — Non-Linear Relationship
 The LOWESS curve shows churn does not increase linearly with price. It remains low at lower price points, rises sharply in the $60–90 range, then declines at the highest tier.
 This matters because it shifts the framing from "higher price = higher churn" to "there is a specific band where customers are most likely to feel the price is not justified." Customers paying above $90 may have more service dependencies or be on plans that deliver clearer value. The $60–90 band warrants targeted investigation — pricing restructure, service bundling, or proactive communication — rather than a blanket discount campaign.
+
+<img width="765" height="637" alt="image" src="https://github.com/user-attachments/assets/25e7c13b-1209-43a5-b4c1-b49698088413" />
+
 Tenure — The Critical Early Period
 The LOWESS curve on tenure shows a near-vertical drop in churn probability within the first 0–10 months, followed by near-zero churn for long-tenure customers. This is not a gradual relationship — it is a phase transition.
 The business implication is direct: retention effort applied after month 10 has diminishing returns. Onboarding quality, early service experience, and first-month engagement are where retention investment has the highest leverage. A customer who reaches month 10 is very likely to stay.
