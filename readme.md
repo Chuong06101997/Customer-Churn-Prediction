@@ -20,9 +20,13 @@ Instead of default threshold 0.50, the model sweeps thresholds and minimizes tot
 <img width="386" height="77" alt="image" src="https://github.com/user-attachments/assets/c0c04bb9-25ec-488e-a74e-421ee5a13011" />
 
 Missing a churner costs 5× more than a false alarm — so recall is prioritized deliberately, not by accident.
+
 2. Expected profit framework
 
 <img width="566" height="76" alt="image" src="https://github.com/user-attachments/assets/dcb355ac-e91f-41d2-b899-f91509ca2dcc" />
+
+> A fixed 3-month retention horizon is used as a simplifying assumption for customer value estimation. Because Expected Profit scales proportionally with retention duration, customers with negative expected profit under a 3-month horizon would generally remain unprofitable even under shorter retention periods. The assumption primarily changes the size of estimated profit, not the underlying retention decision logic.
+
 
 Customers with negative expected profit are excluded from retention campaigns — regardless of churn probability.
 
