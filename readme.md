@@ -29,6 +29,7 @@ Key Visuals
 
 Customer Segmentation
 <img width="812" height="243" alt="image" src="https://github.com/user-attachments/assets/16662bc2-b80f-4a41-aa15-f4e3be62d22f" />
+
 <img width="849" height="521" alt="image" src="https://github.com/user-attachments/assets/645e69af-abfa-4536-baca-1b4360562f27" />
 
 Business Recommendations
@@ -50,6 +51,7 @@ Methodology Overview
 
 
 Project Structure
+
 <img width="822" height="232" alt="image" src="https://github.com/user-attachments/assets/0248f6c3-1df0-4743-8387-fa2d9a5ee90a" />
 
 How to Run
