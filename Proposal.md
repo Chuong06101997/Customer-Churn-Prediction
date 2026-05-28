@@ -96,14 +96,16 @@ Rather than minimizing churn alone, the project focuses on improving business de
 * 7,043 customers
 * 21 features
 * Binary target variable: Churn
+  
+Dataset Link:
+https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
 
-  <img width="409" height="591" alt="image" src="https://github.com/user-attachments/assets/3cc97f0e-5efe-46f2-b336-61428cd66d1d" />
+<img width="409" height="591" alt="image" src="https://github.com/user-attachments/assets/3cc97f0e-5efe-46f2-b336-61428cd66d1d" />
 
 <img width="409" height="379" alt="image" src="https://github.com/user-attachments/assets/bfbb0439-0bb0-4925-99a5-aefa3016b935" />
 
 
-Dataset Link:
-https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
+
 
                 
                 
