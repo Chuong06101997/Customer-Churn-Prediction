@@ -39,6 +39,7 @@ Dataset
 
 Source: IBM Telco Customer Churn
 link : https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
+
 7,043 customers, 21 features
 Churn rate: ~26.5%
 
