@@ -3,60 +3,103 @@
 <img width="1920" height="1280" alt="image" src="https://github.com/user-attachments/assets/ab986de4-1b8f-460c-8741-2e0dce7c1cfb" />
 
 
-## Problem Definition
-### 1. Context
-A telecommunications company is losing customers to competitors. The dataset contains 7,043 customers with 21 features including service usage, contract type, billing, and tenure. The company has no systematic way to identify at-risk customers, nor any framework to determine whether a specific customer justifies retention investment.
-Key constraints:
-
-Retention budget is limited — cannot intervene with every at-risk customer
-Acquiring a new customer costs ~$100, retaining costs ~$20/month
-Customer value varies widely: monthly charges range from $18 to $119
-
-### 2. Need
-The business needs to answer two questions:
-
-Who is likely to churn? — identify at-risk customers before they leave
-Who is worth retaining? — allocate budget where it generates positive return
-
-The real pain point is not churn rate itself, but inefficient retention spending — missing high-value churners or wasting budget on unprofitable customers.
-### 3. Vision
-Combine churn probability with customer value to build a profit-driven retention framework:
-
-Estimate P(churn) per customer via Logistic Regression
-Estimate customer value based on MonthlyCharges × retention horizon
-Calculate expected profit per retention decision
-Segment customers into actionable groups
-
-### 4. Outcome
-
-Retention team can focus on 367 High Risk – High Value customers with highest ROI
-Cost-optimized threshold (0.15) reduces total business cost to $11,260 vs $18,540 at default threshold (0.50) — saving $7,280
-893 out of 1,405 customers identified as not worth retaining at current cost structure — avoiding unnecessary spend
-Decision-makers get a clear framework: retain based on expected profit, not churn probability alone
 
 
-Dataset
+## 1. Context
 
-Source: IBM Telco Customer Churn
-link : https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
+A telecommunications company is experiencing customer churn in a competitive market. The dataset contains 7,043 customers with features related to contract type, billing behavior, service usage, and tenure.
 
-7,043 customers, 21 features
-Churn rate: ~26.5%
+Currently, the company has no systematic framework to:
 
+* identify customers at risk of churn
+* prioritize retention spending
+* evaluate whether retaining a customer is financially worthwhile
 
-Approach
-Churn Prediction
-Logistic Regression trained on 80% of data, evaluated on 20% holdout set.
+Key business constraints:
 
-Feature selection based on statistical significance (p-value < 0.05) from statsmodels summary — used to interpret coefficient direction and magnitude, while sklearn handles prediction pipeline.
+* Retention budget is limited
+* Acquiring a new customer costs more than retaining an existing one
+* Customer value varies significantly across segments
 
-Customer Value Estimation
+---
 
-Customer Value = MonthlyCharges × RETENTION_MONTHS (3)
+## 2. Business Need
 
-Represents expected revenue if the customer is retained for 3 months following intervention.
+The business needs to answer two core questions:
 
-Expected Profit Framework
+1. Which customers are most likely to churn?
+2. Which customers should receive retention investment?
+
+The core problem is not simply reducing churn rate, but improving retention efficiency by allocating intervention budget toward customers with higher expected business value.
+
+---
+
+## 3. Project Vision
+
+This project aims to build a business-oriented churn framework by combining:
+
+* churn probability prediction
+* customer value estimation
+* cost-sensitive decision making
+
+The framework will attempt to:
+
+* estimate churn probability using Logistic Regression
+* estimate customer value using monthly revenue
+* calculate expected retention profitability
+* segment customers into actionable business groups
+
+---
+
+## 4. Proposed Analytical Approach
+
+### Churn Prediction
+
+A Logistic Regression model will be trained to estimate the probability of churn for each customer.
+
+### Customer Value Estimation
+
+Customer value will be approximated using MonthlyCharges and a fixed retention horizon assumption.
+
+### Expected Profit Framework
+
+The project will evaluate whether retention intervention is financially justified by comparing:
+
+* expected retained revenue
+* estimated retention cost
+
+### Threshold Optimization
+
+Instead of using the default classification threshold (0.50), the project will test multiple thresholds to evaluate trade-offs between:
+
+* recall
+* false positives
+* overall business cost
+
+---
+
+## 5. Expected Outcome
+
+The expected outcome is a decision-support framework that helps:
+
+* prioritize high-value at-risk customers
+* reduce inefficient retention spending
+* improve retention ROI
+* translate churn prediction into actionable business strategy
+
+Rather than minimizing churn alone, the project focuses on improving business decision quality through profit-oriented analysis.
+
+---
+
+## Dataset
+
+* Source: IBM Telco Customer Churn
+* 7,043 customers
+* 21 features
+* Binary target variable: Churn
+
+Dataset Link:
+https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
 
 Expected Profit = P(Churn) × Customer Value − (Retention Cost × Retention Months)
                 = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
