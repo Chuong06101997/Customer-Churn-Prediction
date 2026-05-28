@@ -13,21 +13,21 @@ The model also converges cleanly on this dataset and generalizes reasonably well
 Coefficients from Logistic Regression are only comparable when features are on the same scale. Three versions were run for different analytical purposes:
 
 * Unscaled — to confirm statistical significance. All features returned p-value < 0.05, meaning none should be dropped on significance grounds.
-StandardScaler (Z-score) — to interpret effects in terms of standard deviation units. MonthlyCharges (+1.02) and tenure (−1.16) show moderate but meaningful effects per one-SD change.
-MinMaxScaler — to compare relative magnitude across all features on a [0,1] scale. This is what the coefficient chart in the README reflects. MonthlyCharges (+3.40) and tenure (−3.39) emerge as the two dominant and nearly symmetric drivers — one pushing churn up, one pulling it down.
+* StandardScaler (Z-score) — to interpret effects in terms of standard deviation units. MonthlyCharges (+1.02) and tenure (−1.16) show moderate but meaningful effects per one-SD change.
+* MinMaxScaler — to compare relative magnitude across all features on a [0,1] scale. This is what the coefficient chart in the README reflects. MonthlyCharges (+3.40) and tenure (−3.39) emerge as the two dominant and nearly symmetric drivers — one pushing churn up, one pulling it down.
 
 Running all three is not redundant. It confirms that the MonthlyCharges–tenure relationship is robust across scaling choices, not an artifact of one particular normalization.
-Why Threshold 0.15 Was Selected
+## Why Threshold 0.15 Was Selected
 The default classification threshold of 0.50 assumes symmetric error costs — that a missed churner and a false alarm are equally bad. They are not.
 In this business context:
 
-A false negative (missed churner) costs $100 — the estimated cost of acquiring a replacement customer
-A false positive (retained non-churner) costs $20 — the retention intervention cost
+* A false negative (missed churner) costs $100 — the estimated cost of acquiring a replacement customer
+* A false positive (retained non-churner) costs $20 — the retention intervention cost
 
 The cost ratio is 5:1. Under this asymmetry, the optimal threshold shifts toward catching more churners, even at the expense of more false alarms.
 Sweeping thresholds from 0.10 to 0.85 and computing Total Cost = (FN × $100) + (FP × $20) at each point shows that total cost is minimized at threshold 0.15 ($11,260), compared to $18,540 at the default threshold. The $7,280 difference is the direct business value of threshold optimization.
 At threshold 0.15, the model catches 93.5% of actual churners (recall = 0.935) while flagging 448 false positives — each costing only $20 to act on unnecessarily.
-Why Expected Profit Instead of Churn Rate
+## Why Expected Profit Instead of Churn Rate
 Churn rate tells you who is leaving. It does not tell you whether stopping them is worth the cost.
 Expected profit reframes the retention decision as a financial calculation:
 Expected Profit = P(Churn) × Customer Value − Retention Cost
