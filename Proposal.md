@@ -105,9 +105,9 @@ https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/
 
 Expected Profit = P(Churn) × Customer Value − (Retention Cost × Retention Months)
                 = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
-
-    
-A fixed 3-month retention horizon is used as a simplifying assumption for customer value estimation. Because Expected Profit scales proportionally with retention duration, customers with negative expected profit under a 3-month horizon would generally remain unprofitable even under shorter retention periods. The assumption primarily changes the size of estimated profit, not the underlying retention decision logic.
-                
                 
 → Retain if Expected Profit > 0
+    
+>A fixed 3-month retention horizon is used as a simplifying assumption for customer value estimation. Because Expected Profit scales proportionally with retention duration, customers with negative expected profit under a 3-month horizon would generally remain unprofitable even under shorter retention periods. The assumption primarily changes the size of estimated profit, not the underlying retention decision logic.
+                
+                
