@@ -28,6 +28,7 @@ Key Visuals
 (Threshold vs Total Cost — optimal at 0.15)
 
 Customer Segmentation
+
 <img width="812" height="243" alt="image" src="https://github.com/user-attachments/assets/16662bc2-b80f-4a41-aa15-f4e3be62d22f" />
 
 <img width="849" height="521" alt="image" src="https://github.com/user-attachments/assets/645e69af-abfa-4536-baca-1b4360562f27" />
