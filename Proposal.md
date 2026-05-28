@@ -4,7 +4,6 @@
 
 
 
-
 ## 1. Context
 
 A telecommunications company is experiencing customer churn in a competitive market. The dataset contains 7,043 customers with features related to contract type, billing behavior, service usage, and tenure.
@@ -101,13 +100,5 @@ Rather than minimizing churn alone, the project focuses on improving business de
 Dataset Link:
 https://www.kaggle.com/code/farazrahman/telco-customer-churn-logisticregression/input
 
-
-
-Expected Profit = P(Churn) × Customer Value − (Retention Cost × Retention Months)
-                = P(Churn) × (MonthlyCharges × 3) − ($20 × 3)
-                
-→ Retain if Expected Profit > 0
-    
->A fixed 3-month retention horizon is used as a simplifying assumption for customer value estimation. Because Expected Profit scales proportionally with retention duration, customers with negative expected profit under a 3-month horizon would generally remain unprofitable even under shorter retention periods. The assumption primarily changes the size of estimated profit, not the underlying retention decision logic.
                 
                 
