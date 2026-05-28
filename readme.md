@@ -6,6 +6,7 @@ A churn prediction model that goes one step further: instead of just flagging at
 Core insight: not every churner is worth retaining.
 
 Key Results: 
+
 <img width="484" height="441" alt="image" src="https://github.com/user-attachments/assets/b875b613-df24-4aa7-8169-49402dafeb28" />
 
 <img width="803" height="333" alt="image" src="https://github.com/user-attachments/assets/61bbd781-ac71-4380-92f5-2da07080b227" />
@@ -27,7 +28,12 @@ Customers with negative expected profit are excluded from retention campaigns �
 
 Key Visuals
 (Tenure vs Churn — LOWESS curve showing sharp drop in first 10 months)
+<img width="765" height="637" alt="image" src="https://github.com/user-attachments/assets/ca34c281-a9d7-4599-98ed-2903e25f568b" />
+
 (MonthlyCharges vs Churn — non-linear relationship peaking at $60–90)
+
+<img width="598" height="565" alt="image" src="https://github.com/user-attachments/assets/94b6ce2a-44c6-40f9-ae65-f01a3e839444" />
+
 (Customer Segmentation — 4-quadrant bar chart)
 (Threshold vs Total Cost — optimal at 0.15)
 
