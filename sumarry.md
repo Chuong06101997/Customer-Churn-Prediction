@@ -1,65 +1,63 @@
-# Customer Churn Prediction & Profit Optimization
+# Analytical Summary — Customer Churn Prediction & Profit Optimization
 
-## Executive Summary
-Dự án xây dựng mô hình dự đoán churn kết hợp với framework tối ưu hóa lợi nhuận, nhằm giúp doanh nghiệp viễn thông quyết định khách hàng nào đáng giữ chân — không phải giảm churn bằng mọi giá.
-Kết quả chính: threshold tối ưu (0.15) tiết kiệm $7,280 so với threshold mặc định trên tập test 1,405 khách hàng, xác định 367 khách hàng High Risk – High Value cần ưu tiên can thiệp, và loại 893/1,405 khách hàng ra khỏi danh sách giữ chân vì không sinh lời ở cấu trúc chi phí hiện tại.
-Business Problem
-## Context
-Công ty viễn thông đang mất khách hàng vào tay đối thủ. Hiện tại chưa có framework hệ thống nào để xác định khách nào có nguy cơ rời bỏ, và liệu chi phí giữ chân có đáng hay không. Chi phí tìm khách mới (~$100) cao hơn chi phí giữ chân (~$20/tháng) — nhưng không phải khách hàng nào cũng sinh lời đủ để justify việc can thiệp.
-## Need
-Doanh nghiệp cần trả lời hai câu hỏi: ai có khả năng rời bỏ, và ai thực sự đáng để giữ chân?
-## Vision
-Kết hợp xác suất churn với giá trị khách hàng để xây dựng retention framework dựa trên lợi nhuận kỳ vọng — không phải churn rate đơn thuần.
-## Outcome
-Đội retention có framework rõ ràng để phân bổ ngân sách hiệu quả: giữ chân dựa trên expected profit, tập trung vào đúng khách hàng thay vì can thiệp đại trà.
----
+## Why This Project Exists
+Telecom companies routinely run retention campaigns on any customer flagged as "at risk." The implicit assumption is that retaining customers is always worth the cost. It often isn't.
+This project starts from a different premise: churn probability alone is not a decision. A customer with 70% churn probability but $18/month in charges may not justify a $60 intervention. A customer with 40% churn probability but $100/month in charges very likely does.
+The goal is not to minimize churn rate. It is to maximize the return on retention spend.
 
-### Key Results
-#### Model Summary
-Hai yếu tố tác động mạnh nhất ngược chiều nhau: MonthlyCharges tăng churn mạnh nhất (coefficient +3.40) trong khi tenure giảm churn mạnh nhất (−3.39). Các yếu tố giảm churn khác gồm PhoneService (−1.11) và TechSupport_Yes (−0.71). Ngược lại, PaymentMethod_Electronic check (+0.46) và PaperlessBilling (+0.43) có tương quan dương với churn.
-Kết quả này được rút ra từ MinMaxScaler model — scale tất cả biến về [0,1] để coefficients có thể so sánh trực tiếp về magnitude. Ba model statsmodels được chạy song song để cross-check:
+## Analytical Decisions and Why They Were Made
+Why Logistic Regression
+Logistic Regression was chosen deliberately over more complex models. For a business-oriented project, interpretability matters: the model needs to explain why a customer is at risk, not just that they are. Logistic Regression produces coefficients that can be directly interpreted as directional effects, which feeds into the business recommendation layer.
+The model also converges cleanly on this dataset and generalizes reasonably well — 10-fold cross-validation accuracy of 80.3% — without requiring extensive tuning.
+## Why Three Scalers Were Run
+Coefficients from Logistic Regression are only comparable when features are on the same scale. Three versions were run for different analytical purposes:
 
-Unscaled: cho thấy direction và statistical significance (p-value) của từng biến — tất cả features đều có p-value < 0.05
-StandardScaler (Z-score): chuẩn hóa theo mean và std — coefficients MonthlyCharges (+1.02) và tenure (−1.16) phản ánh tác động tính theo đơn vị standard deviation
-MinMaxScaler: scale về [0,1] — coefficients MonthlyCharges (+3.40) và tenure (−3.39) cho thấy hai biến này có tác động lớn nhất và gần như cân bằng nhau về magnitude
+* Unscaled — to confirm statistical significance. All features returned p-value < 0.05, meaning none should be dropped on significance grounds.
+StandardScaler (Z-score) — to interpret effects in terms of standard deviation units. MonthlyCharges (+1.02) and tenure (−1.16) show moderate but meaningful effects per one-SD change.
+MinMaxScaler — to compare relative magnitude across all features on a [0,1] scale. This is what the coefficient chart in the README reflects. MonthlyCharges (+3.40) and tenure (−3.39) emerge as the two dominant and nearly symmetric drivers — one pushing churn up, one pulling it down.
 
-Việc chạy cả ba scaler xác nhận rằng MonthlyCharges và tenure là hai yếu tố chi phối churn — kết quả nhất quán qua tất cả các cách scale.
+Running all three is not redundant. It confirms that the MonthlyCharges–tenure relationship is robust across scaling choices, not an artifact of one particular normalization.
+Why Threshold 0.15 Was Selected
+The default classification threshold of 0.50 assumes symmetric error costs — that a missed churner and a false alarm are equally bad. They are not.
+In this business context:
 
-#### Model Performance
-Mô hình đạt recall 0.935 ở threshold 0.15, nghĩa là bắt được 93.5% khách hàng thực sự churn. Accuracy ở mức 66% — thấp hơn baseline 74.9% — là có chủ đích: model được tối ưu cho tổng chi phí kinh doanh, không phải accuracy. Bỏ sót 1 churner tốn $100 để tìm khách mới, trong khi giữ nhầm 1 người chỉ tốn $20 — asymmetry này justifies việc ưu tiên recall. Cross-validation 10-fold cho mean accuracy 80.3%, cao hơn test accuracy do CV chạy trên unscaled data — test accuracy là con số đáng tin hơn để report.
+A false negative (missed churner) costs $100 — the estimated cost of acquiring a replacement customer
+A false positive (retained non-churner) costs $20 — the retention intervention cost
 
-Cost-Sensitive Threshold Optimization
-Tổng chi phí được tính theo công thức: 
+The cost ratio is 5:1. Under this asymmetry, the optimal threshold shifts toward catching more churners, even at the expense of more false alarms.
+Sweeping thresholds from 0.10 to 0.85 and computing Total Cost = (FN × $100) + (FP × $20) at each point shows that total cost is minimized at threshold 0.15 ($11,260), compared to $18,540 at the default threshold. The $7,280 difference is the direct business value of threshold optimization.
+At threshold 0.15, the model catches 93.5% of actual churners (recall = 0.935) while flagging 448 false positives — each costing only $20 to act on unnecessarily.
+Why Expected Profit Instead of Churn Rate
+Churn rate tells you who is leaving. It does not tell you whether stopping them is worth the cost.
+Expected profit reframes the retention decision as a financial calculation:
+Expected Profit = P(Churn) × Customer Value − Retention Cost
+Customer Value = MonthlyCharges × 3
+Retention Cost = $20 × 3 = $60
+A customer with P(Churn) = 0.75 and MonthlyCharges = $53.85:
+Expected Profit = 0.75 × $161.55 − $60 = $61.16 → retain
+A customer with P(Churn) = 0.40 and MonthlyCharges = $18:
+Expected Profit = 0.40 × $54 − $60 = −$38.40 → skip
+The second customer has meaningful churn risk but is not worth the intervention. A model that treats both the same wastes budget.
+Applied to the full test set, 512 customers show positive expected profit. The remaining 893 do not justify retention spend under current cost assumptions.
 
-<img width="367" height="86" alt="image" src="https://github.com/user-attachments/assets/b9c7378a-12a1-455d-be49-cda07c8295b5" />
- 
+## What the EDA Findings Mean for Business
+MonthlyCharges — Non-Linear Relationship
+The LOWESS curve shows churn does not increase linearly with price. It remains low at lower price points, rises sharply in the $60–90 range, then declines at the highest tier.
+This matters because it shifts the framing from "higher price = higher churn" to "there is a specific band where customers are most likely to feel the price is not justified." Customers paying above $90 may have more service dependencies or be on plans that deliver clearer value. The $60–90 band warrants targeted investigation — pricing restructure, service bundling, or proactive communication — rather than a blanket discount campaign.
+Tenure — The Critical Early Period
+The LOWESS curve on tenure shows a near-vertical drop in churn probability within the first 0–10 months, followed by near-zero churn for long-tenure customers. This is not a gradual relationship — it is a phase transition.
+The business implication is direct: retention effort applied after month 10 has diminishing returns. Onboarding quality, early service experience, and first-month engagement are where retention investment has the highest leverage. A customer who reaches month 10 is very likely to stay.
 
-Sweep threshold từ 0.10 đến 0.85 cho thấy threshold 0.15 đạt tổng chi phí thấp nhất là $11,260, với recall 0.935, chỉ bỏ sót 23 churner thực sự (FN) và giữ nhầm 448 người (FP). So với threshold mặc định 0.50 có tổng chi phí $ 18,540, threshold 0.15 tiết kiệm $7,280 trên tập test 1,405 khách hàng.
+Trade-offs and What This Model Does Not Do
+Retention success is assumed to be 100%. The expected profit formula does not discount for the probability that an intervention actually works. In practice, retention campaigns succeed at some rate below 1.0 — which would reduce expected profit estimates for all customers and likely shift some from "retain" to "skip."
+Cost-to-serve is assumed uniform. A customer calling support 15 times a month is more expensive to serve than one who never contacts the company, even if their monthly charges are identical. This model does not capture that dimension.
+The 3-month retention horizon is fixed. Some customers, if retained, will stay for years. Others will churn again in month 4. A more sophisticated model would estimate expected lifetime rather than a fixed window.
+These limitations do not invalidate the framework — they define where it should be refined with real business data before deployment.
 
-### Business Framework
-Customer Value
 
-<img width="391" height="48" alt="image" src="https://github.com/user-attachments/assets/e4f02b80-269e-4b01-9f97-13d46ad43938" />
+## What This Demonstrates Analytically
 
-
-Đại diện cho revenue kỳ vọng nếu giữ được khách thêm 3 tháng sau can thiệp.
-
-### Expected Profit
-
-<img width="647" height="75" alt="image" src="https://github.com/user-attachments/assets/8e87e2d9-bd85-406c-9f92-8ddaa8c9a857" />
-
-               
-Nếu Expected Profit > 0 thì nên giữ. Nếu ≤ 0 thì không cần đầu tư.
-
-### Customer Segmentation
-Dựa trên churn probability (ngưỡng 0.30) và customer value median, 1,405 khách hàng được chia thành 4 nhóm. Nhóm High Risk – High Value gồm 367 khách cần được ưu tiên giữ chân vì có ROI cao nhất. Nhóm High Risk – Low Value gồm 168 khách nên hạn chế hoặc không can thiệp. Nhóm Low Risk – High Value gồm 336 khách cần theo dõi và duy trì quan hệ. Nhóm Low Risk – Low Value gồm 534 khách không cần hành động ngay.
-
-Về expected profit, với retention cost $20/tháng trong 3 tháng, có 512 khách hàng đáng giữ và 893 khách hàng không đáng đầu tư ở cấu trúc chi phí hiện tại.
-
-Limitations & Assumptions
-Customer Value giả định retention horizon cố định 3 tháng sau can thiệp. Chi phí giữ chân ($20/tháng) và tìm khách mới ($100) là assumed values — triển khai thực tế cần số liệu chi phí thực của doanh nghiệp. P(retention success | intervention) được giả định bằng 1.0 — trong thực tế con số này thấp hơn và sẽ làm giảm expected profit. Model cũng không tính đến sự chênh lệch cost-to-serve giữa các khách hàng. Dataset là public (IBM Telco) — bối cảnh và ràng buộc được mô phỏng để thể hiện business-oriented thinking.
-
-Tools
-Python · Pandas · Scikit-learn · Statsmodels · Matplotlib · Seaborn
-
-Churn prediction chỉ là bước đầu. Giá trị thực nằm ở việc kết hợp xác suất churn với giá trị khách hàng để đưa ra quyết định giữ chân dựa trên lợi nhuận kỳ vọng — không phải tỷ lệ churn đơn thuần.
+Framing a prediction problem as a decision problem with asymmetric costs
+Selecting evaluation metrics based on business context, not convention
+Translating model outputs into actionable financial estimates
+Communicating trade-offs and assumptions honestly rather than overstating model capability
