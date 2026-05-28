@@ -36,6 +36,9 @@ Expected profit reframes the retention decision as a financial calculation:
 
 <img width="600" height="128" alt="image" src="https://github.com/user-attachments/assets/f8e4125e-8fb8-45f1-b528-b317bb889ebf" />
 
+> A fixed 3-month retention horizon is used as a simplifying assumption for customer value estimation. Because Expected Profit scales proportionally with retention duration, customers with negative expected profit under a 3-month horizon would generally remain unprofitable even under shorter retention periods. The assumption primarily changes the size of estimated profit, not the underlying retention decision logic.
+
+
 Customer Value = MonthlyCharges × 3
 Retention Cost = $20 × 3 = $60
 A customer with P(Churn) = 0.75 and MonthlyCharges = $53.85:
